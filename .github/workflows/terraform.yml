@@ -16,7 +16,6 @@ env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   # S3 bucket for the terraform state.
-  # S3 bucket for the terraform state.
   BUCKET_TF_STATE: ${{ secrets.BUCKET_TF }}
   AWS_REGION: us-east-1
 
@@ -32,11 +31,21 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
+      - name: Check AWS CLI version
+        run: aws --version
+
+      - name: Debug AWS CLI Authentication
+        run: aws sts get-caller-identity --debug
+
       - name: Setup Terraform with specified version on the runner
         uses: hashicorp/setup-terraform@v3
 
-      - name: Test AWS CLI Authentication
-        run: aws sts get-caller-identity
+      - name: Configure AWS CLI
+        run: |
+          echo "${{ secrets.AWS_ACCESS_KEY_ID }}" > ~/.aws/credentials
+          echo "[default]" >> ~/.aws/credentials
+          echo "aws_access_key_id = ${{ secrets.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials
+          echo "aws_secret_access_key = ${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
 
       - name: Terraform Init
         id: init
