@@ -58,13 +58,6 @@ jobs:
       - name: Setup Terraform with specified version on the runner
         uses: hashicorp/setup-terraform@v3
 
-      - name: Configure AWS CLI
-        run: |
-          echo "${{ secrets.AWS_ACCESS_KEY_ID }}" > ~/.aws/credentials
-          echo "[default]" >> ~/.aws/credentials
-          echo "aws_access_key_id = ${{ secrets.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials
-          echo "aws_secret_access_key = ${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
-
       - name: Terraform Init
         id: init
         run: terraform init -backend-config "bucket=$BUCKET_TF_STATE"
