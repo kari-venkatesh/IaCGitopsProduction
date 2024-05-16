@@ -57,6 +57,7 @@ variable "key_name" {
   description = "EC2 keypair"
   type        = string
   default     = "gitopskey"
+
 }
 
 variable "instance_name" {
