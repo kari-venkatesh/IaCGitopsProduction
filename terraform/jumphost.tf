@@ -10,8 +10,22 @@ resource "aws_instance" "ec2" {
   }
   user_data = templatefile("./install-tools.sh", {})
 
+
+
   tags = {
 
     Name = var.instance_name
   }
+
+  provisioner "remote-exec" {
+    inline = ["echo 'Wait until SSH is ready'"]
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"                   # Default Ubuntu user
+      private_key = file(var.private_key_path) # Path to your private key file
+      host        = self.public_ip
+    }
+  }
+
 }
