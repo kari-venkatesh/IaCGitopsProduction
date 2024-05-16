@@ -25,17 +25,6 @@ sudo apt install unzip -y
 unzip awscliv2.zip
 sudo ./aws/install
 
-# Create SSH Key Pair
-if! aws ec2 describe-key-pairs --key-names gitopskey >/dev/null 2>&1; then
-    echo "Creating SSH key pair 'gitopskey'"
-    aws ec2 create-key-pair --key-name gitopskey --query 'KeyMaterial' --output text > gitopskey.pem
-    chmod 400 gitopskey.pem
-else
-    echo "'gitopskey' already exists."
-fi
-
-# Continue with the rest of your script...
-
 # Install Kubectl
 sudo apt update
 sudo apt install curl -y

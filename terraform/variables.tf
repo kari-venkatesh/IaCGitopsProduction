@@ -56,7 +56,7 @@ variable "instance_type" {
 variable "key_name" {
   description = "EC2 keypair"
   type        = string
-  default     = "gitopskey"
+  default     = "ansible"
 
 }
 
@@ -66,8 +66,5 @@ variable "instance_name" {
   default     = "Jumphost-server"
 }
 
-variable "private_key_path" {
-  description = "Path to the private key file for SSH access"
-  default     = "~/.ssh/my-private-key" # Adjust this path as necessary
-}
+
 
