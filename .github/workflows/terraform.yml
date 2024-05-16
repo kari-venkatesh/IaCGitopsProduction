@@ -31,8 +31,26 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
       - name: Check AWS CLI version
         run: aws --version
+
+      - name: Verify AWS CLI configuration
+        run: |
+          aws configure list
+              echo "Checking AWS CLI version..."
+              aws --version || (echo "AWS CLI not found" && exit 1)
+
+      - name: Test AWS CLI connectivity
+        run: |
+          echo "Testing AWS CLI connectivity..."
+          aws sts get-caller-identity --debug || (echo "Failed to connect to AWS" && exit 1)
 
       - name: Debug AWS CLI Authentication
         run: aws sts get-caller-identity --debug
