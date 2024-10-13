@@ -7,7 +7,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "kuberneteslabproject"
+    bucket = "terraformgitopsaws"
     key    = "terraform.tfstate"
     region = "us-east-1"
   }
