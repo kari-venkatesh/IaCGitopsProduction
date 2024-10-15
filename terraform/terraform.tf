@@ -7,7 +7,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "quizapptfstatefile"
+    bucket = "terraformgitopsaws"
     key    = "terraform.tfstate"
     region = "us-east-1"
   }
