@@ -7,9 +7,9 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "terraformgitopsaws"
-    key    = "terraform.tfstate"
-    region = "us-east-1"
+    bucket = "devops-preparation-outcome"
+    key    = "GithubActions/terraform.tfstate"
+    region = "ap-south-1"
   }
   required_version = ">= 1.6.3"
 }

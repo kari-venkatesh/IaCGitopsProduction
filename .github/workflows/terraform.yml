@@ -16,8 +16,8 @@ env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   # S3 bucket for the terraform state.
-  BUCKET_TF_STATE: ${{ secrets.BUCKET_TF }}
-  AWS_REGION: us-east-1
+  BUCKET_TF_STATE: ${{ secrets.BUCKET_NAME }}
+  AWS_REGION: ap-south-1
 
 jobs:
   terraform:
@@ -36,7 +36,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          aws-region: ap-south-1
 
       - name: Check AWS CLI version
         run: aws --version
@@ -60,7 +60,7 @@ jobs:
 
       - name: Terraform Init
         id: init
-        run: terraform init -backend-config "bucket=$BUCKET_TF_STATE"
+        run: terraform init 
 
       - name: Terraform Format
         id: fmt
