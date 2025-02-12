@@ -23,7 +23,7 @@ variable "subnet-name" {
 }
 
 variable "rt-name" {
-  description = "Route Table Name for our Jumphost server"
+  description = "Route Table Name for our Jumphost server_1"
   type        = string
   default     = "Jumphost-rt"
 }
