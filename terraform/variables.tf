@@ -17,7 +17,7 @@ variable "igw-name" {
 }
 
 variable "subnet-name" {
-  description = "Subnet Name for our Jumphost server"
+  description = "Subnet Name for ours Jumphost server"
   type        = string
   default     = "Jumphost-subnet"
 }
@@ -64,6 +64,7 @@ variable "instance_name" {
   type        = string
   default     = "Jumphost-server"
 }
+# sample code
 
 
 
